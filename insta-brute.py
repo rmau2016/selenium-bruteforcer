@@ -8,6 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.proxy import Proxy, ProxyType
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from fake_useragent import UserAgent
 
 
 socks = []
@@ -27,13 +28,15 @@ class InstaBot:
         try:
             if socks_4f != 'N':
                 options = Options()
-                options.add_argument('--proxy-server={}'.format(socks_proxy))
+                options.add_argument('--proxy-server=socks5://{}'.format(socks_proxy.strip()))
                 options.add_argument("start-maximized")
-                driver = webdriver.Chrome(
-                    "/home/robert/Desktop/chromedriver")
+                ua = UserAgent()
+                user_agent = ua.random
+                options.add_argument(f'user-agent={user_agent}')
+                driver = webdriver.Chrome( "/home/robert/Desktop/chromedriver",chrome_options = options)
                 driver.implicitly_wait(0.6)
                 driver.get(
-                    "https://www.instagram.com/accounts/login/?source=auth_switcher")
+                    "https://www.instagram.com/accounts/login")
                 time.sleep(getRandomTime())
                 driver.implicitly_wait(10)
                 driver.find_element_by_xpath(
