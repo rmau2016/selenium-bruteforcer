@@ -11,7 +11,7 @@ Line 50 and 36 will be the place to insert the location of the chromedriver
 EX. ```driver = webdriver.Chrome("YOUR PATH", chrome_options=chrome_options)```
 
 ## Run 
-```python3 insta3.py (NO SUDO FOR LINUX)```
+```python3 insta-brute.py (NO SUDO FOR LINUX)```
 
 ```Insert Proxy List or simply type N```
 
