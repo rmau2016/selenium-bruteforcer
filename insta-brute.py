@@ -26,29 +26,23 @@ class InstaBot:
     def __init__(self, username, password, i, socks_4f, socks_proxy):
         try:
             if socks_4f != 'N':
-                webdriver.DesiredCapabilities.CHROME['proxy'] = {
-                    "httpProxy": socks_proxy,
-                    "ftpProxy": socks_proxy,
-                    "sslProxy": socks_proxy,
-                    "proxyType": "MANUAL",
+                options = Options()
+                options.add_argument('--proxy-server={}'.format(socks_proxy))
+                options.add_argument("start-maximized")
+                driver = webdriver.Chrome(
+                    "/home/robert/Desktop/chromedriver")
+                driver.implicitly_wait(0.6)
+                driver.get(
+                    "https://www.instagram.com/accounts/login/?source=auth_switcher")
+                time.sleep(getRandomTime())
+                driver.implicitly_wait(10)
+                driver.find_element_by_xpath(
+                    "//input[@name=\"username\"]").send_keys(username)
+                driver.find_element_by_xpath(
+                    "//input[@name=\"password\"]").send_keys(password)
 
-                }
-              # configure ChromeOptions class
-            webdriver.DesiredCapabilities.CHROME['acceptSslCerts'] = True
-            driver = webdriver.Chrome(
-                "/home/robert/Desktop/chromedriver")
-            driver.implicitly_wait(0.6)
-            driver.get(
-                "https://www.instagram.com/accounts/login/?source=auth_switcher")
-            time.sleep(getRandomTime())
-            driver.implicitly_wait(10)
-            driver.find_element_by_xpath(
-                "//input[@name=\"username\"]").send_keys(username)
-            driver.find_element_by_xpath(
-                "//input[@name=\"password\"]").send_keys(password)
-
-            driver.find_element_by_xpath(
-                '//button[@type="submit"]').click()
+                driver.find_element_by_xpath(
+                    '//button[@type="submit"]').click()
 
             if socks_4f == 'N':
                 driver = webdriver.Chrome(
