@@ -13,7 +13,7 @@ EX. ```driver = webdriver.Chrome("YOUR PATH", chrome_options=chrome_options)```
 ## Run 
 ```python3 insta3.py```
 
-```Insert Proxy List or simply stype N```
+```Insert Proxy List or simply type N```
 
 ## Insert Combo List in [EMAIL:PASS] Format
 
