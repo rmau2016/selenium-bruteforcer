@@ -1,4 +1,3 @@
-
 import time
 from random import seed
 from random import randint
@@ -36,7 +35,8 @@ class InstaBot:
                 driver = webdriver.Chrome(
                     "/home/robert/Desktop/chromedriver", chrome_options=chrome_options)
                 driver.implicitly_wait(0.6)
-                driver.get("https://www.instagram.com/accounts/login/?source=auth_switcher")
+                driver.get(
+                    "https://www.instagram.com/accounts/login/?source=auth_switcher")
                 time.sleep(getRandomTime())
                 river.find_element_by_xpath(
                     "//input[@name=\"username\"]").send_keys(username)
@@ -91,12 +91,11 @@ for line in r_file:
     User = line.split(":")[0]
     Password = line.split(":")[1]
     print("\nCOMBO: ", User, ":", Password)
-
-    socks_proxy = str(socks[i])
     if socks_4f != 'N':
+        socks_proxy = str(socks[i])
         InstaBot(User, Password, i, socks_proxy)
+        print("\nSOCKS: " + socks_proxy)
     InstaBot(User, Password, i, socks_4f)
-    print("\nSOCKS: " + socks_proxy)
     print("\n<Error Wrong Login>")
     if socks_4f != 'N':
         if i == len(socks) - 1:
