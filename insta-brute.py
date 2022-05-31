@@ -101,5 +101,5 @@ for line in r_file:
     if socks_4f != 'N':
         if i == len(socks) - 1:
             print("Recycling Socks")
-    i -= len(socks)
+            i -= len(socks)
     i += 1
