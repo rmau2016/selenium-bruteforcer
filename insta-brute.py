@@ -13,7 +13,7 @@ from fake_useragent import UserAgent
 
 socks = []
 
-socks_4f = input("What is the Socks4 file?(N: FOR NO SOCKS)")
+socks_4f = input("What is the Socks file?(N: FOR NO SOCKS)")
 if socks_4f != 'N':
     socks_4f = open(socks_4f, 'r')
 
