@@ -10,11 +10,15 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from fake_useragent import UserAgent
 
+import pyfiglet as pyg 
 
+res= pyg.figlet_format("Welcome to Insta-Brute!")   
+print('If you need any extra options, go to my github https://github.com/rmau2016')  
+print(res)  
 socks = []
 w_file = open("Success.txt", 'w+')
 
-socks_4f = input("What is the Socks file?(N: FOR NO SOCKS)")
+socks_4f = input("What is the Socks 5 file?(N: FOR NO SOCKS)")
 if socks_4f != 'N':
     socks_4f = open(socks_4f, 'r')
 
