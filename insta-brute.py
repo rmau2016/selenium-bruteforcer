@@ -16,7 +16,7 @@ res= pyg.figlet_format("Welcome to Insta-Brute!")
 print('If you need any extra options, go to my github https://github.com/rmau2016')  
 print(res)  
 socks = []
-w_file = open("Success.txt", 'w+')
+w_file = open("Success.txt", 'a')
 
 socks_4f = input("What is the Socks 5 file?(N: FOR NO SOCKS)")
 if socks_4f != 'N':
