@@ -15,13 +15,14 @@ import pyfiglet as pyg
 res = pyg.figlet_format("Welcome to Insta-Brute!")
 print('If you need any extra options, go to my github https://github.com/rmau2016')
 print(res)
+Success = input("What's the Output File Name?: ")
 socks = []
-w_file = open("Success.txt", 'a')
+
 
 socks_4f = input("What is the Socks file?(N: FOR NO SOCKS)")
 if socks_4f != 'N':
     socks_4f = open(socks_4f, 'r')
-
+w_file = open(Success, 'w')
 for line in socks_4f:
     socks.append(line)
 print("\n SOCKS ADDED\n")
