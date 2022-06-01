@@ -5,7 +5,8 @@ Instagram-selenium-bruteforcer uses python to login, comes with Socks5 support.
 ```pip install selenium```
 Don't Forget to upgrade selenium!
 ```pip install selenium -U```
-
+## Download the Script:
+``` sudo git clone https://github.com/rmau2016/Instagram-selenium-bruteforcer.git ```
 ## Download the latest chrome driver(also make sure you have the binary)
 https://chromedriver.chromium.org/downloads
 Line 50 and 36 will be the place to insert the location of the chromedriver
