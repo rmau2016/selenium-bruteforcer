@@ -114,11 +114,17 @@ for line in r_file:
     print("\nCOMBO: ", User, ":", Password)
     if socks_4f != 'N':
         socks_proxy = str(socks[i])
-        InstaBot(User, Password, i, socks_4f, socks_proxy, w_file)
+        try:
+            InstaBot(User, Password, i, socks_4f, socks_proxy, w_file)
+        except Exception:
+        	print("Page failed to load")
         print("\nSOCKS: " + socks_proxy)
     if socks_4f == 'N':
         socks_proxy = str(socks)
-        InstaBot(User, Password, i, socks_4f, socks_proxy, w_file)
+        try:
+            InstaBot(User, Password, i, socks_4f, socks_proxy, w_file)
+        except:
+        	print("Page failed to load")
     if socks_4f != 'N':
         if i == len(socks) - 1:
             print("Recycling Socks")
