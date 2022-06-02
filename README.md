@@ -20,7 +20,7 @@ EX. ```driver = webdriver.Chrome("YOUR PATH", chrome_options=chrome_options)```
 
 ## Insert Combo List in [EMAIL:PASS] Format
 
-This will start the browser bruteforce, eventually if there is successful credentials the bot will write to a file called success!
+This will start the browser bruteforce, eventually if there is successful credentials the bot will write to a file!
 
 
 
