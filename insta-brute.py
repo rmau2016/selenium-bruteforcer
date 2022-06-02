@@ -16,7 +16,7 @@ res = pyg.figlet_format("Welcome to Insta-Brute!")
 print('If you need any extra options, go to my github https://github.com/rmau2016')
 print(res)
 Success = input("What's the Output File Name?: ")
-w_file = open(Success, 'a')
+w_file = open(Success, 'w+')
 socks = []
 
 
