@@ -1,5 +1,5 @@
 # Selenium-bruteforcer
-Instagram-selenium-bruteforcer uses python to login, comes with Socks5 support.
+selenium-bruteforcer uses python to login, comes with Socks5 support and will bruteforce Instagram and Facebook.
 
 ## First Get Selenium:
 ```pip install selenium```
