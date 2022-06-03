@@ -1,4 +1,4 @@
-# Instagram-selenium-bruteforcer
+# Selenium-bruteforcer
 Instagram-selenium-bruteforcer uses python to login, comes with Socks5 support.
 
 ## First Get Selenium:
