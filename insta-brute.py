@@ -141,4 +141,5 @@ for line in r_file:
             print("Recycling Socks")
             i -= len(socks)
     i += 1
+w_file.close()
 
